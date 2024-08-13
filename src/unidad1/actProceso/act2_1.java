@@ -14,18 +14,57 @@ para continuar con la carga el programa debe preguntar si sedea continuar o no. 
 public class act2_1 {
     public static void main(String[] ar) {
         Scanner sc = new Scanner(System.in);
-        char sexo;
-        int altura, edad;
-        float cantTotalAltM, cantTotalEdad, cantTotalAltH;
-        String nombre;
-        do{
-            System.out.println("Ingresa tu nombre, edad y sexo(M/F), separados por espacios:");
+        char sexo, cent;
+        int altura, alturaMenor=0, edad, edadMenor = 0, cantTotal = 0, cantF = 0, cantM = 0;
+        float alturaFem = 0, promedioEdad = 0, alturaMasc = 0;
+        String nombre, nombreMenor="s";
+        do {
+            System.out.println("Ingresa tu nombre:");
+            nombre = sc.nextLine();
+            System.out.println("Ingresa tu edad:");
+            edad = sc.nextInt();
+            System.out.println("Ingresa tu altura:");
+            altura = sc.nextInt();
+            System.out.println("Ingresa tu sexo (F/M):");
+            sexo = sc.next().charAt(0);
+            sc.nextLine();
+
+            cantTotal++;
+            promedioEdad += edad;
+            if (edadMenor==0){
+                edadMenor=edad;
+                nombreMenor=nombre;
+                alturaMenor=altura;
+            } else if (edadMenor>edad) {
+                edadMenor=edad;
+                nombreMenor=nombre;
+                alturaMenor=altura;
+            }
+            if (sexo == 'F') {
+                cantF++;
+                alturaFem += altura;
+            } else if (sexo == 'M') {
+                cantM++;
+                alturaMasc += altura;
+            }
 
             System.out.println("desea ingresar datos de otro participante? s para si n para no");
-            cent=sc.next
-        } while();
+            cent = sc.next().charAt(0);
+            sc.nextLine();
+        } while (cent == 's');
+        System.out.println("\tel promedio de altura de las mujeres es de " +
+
+                promed(alturaFem, cantF)
+                + "\n\tel promedio de altura de los varones es de " + promed(alturaMasc, cantM)
+                + "\n\tel promedio de edad de los participantes es de " + promed(promedioEdad, cantTotal)
+                + "\n\tla persona mas joven se llama " + nombreMenor + " tiene " + edadMenor + " años y mide "
+                + alturaMenor + "cm.");
     }
-    public static float promed(int a,int b){
-        return a/b;
+
+    public static float promed(float a, int b) {
+        if(b==0){
+            return 0;
+        }else{
+        return a / b;}
     }
 }
