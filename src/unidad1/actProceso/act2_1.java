@@ -14,30 +14,29 @@ para continuar con la carga el programa debe preguntar si sedea continuar o no. 
 public class act2_1 {
     public static void main(String[] ar) {
         char sexo, cent;
-        int altura, alturaMenor=0, edad, edadMenor = 0, cantTotal = 0, cantF = 0, cantM = 0;
+        int altura, alturaMenor = 0, edad, edadMenor = 0, cantTotal = 0, cantF = 0, cantM = 0;
         float alturaFem = 0, promedioEdad = 0, alturaMasc = 0;
-        String nombre, nombreMenor="s";
+        String nombre, nombreMenor = "s";
         do {
-            System.out.println("Ingresa tu nombre:");
-            nombre = sc.nextLine();
-            System.out.println("Ingresa tu edad:");
-            edad = sc.nextInt();
-            System.out.println("Ingresa tu altura:");
-            altura = sc.nextInt();
-            System.out.println("Ingresa tu sexo (F/M):");
-            sexo = sc.next().charAt(0);
-            sc.nextLine();
+            System.out.print("Ingresa tu nombre:");
+            nombre = cadena();
+            System.out.print("Ingresa tu edad:");
+            edad = entero();
+            System.out.print("Ingresa tu altura:");
+            altura = entero();
+            System.out.print("Ingresa tu sexo (F/M):");
+            sexo = caracter();
 
             cantTotal++;
             promedioEdad += edad;
-            if (edadMenor==0){
-                edadMenor=edad;
-                nombreMenor=nombre;
-                alturaMenor=altura;
-            } else if (edadMenor>edad) {
-                edadMenor=edad;
-                nombreMenor=nombre;
-                alturaMenor=altura;
+            if (edadMenor == 0) {
+                edadMenor = edad;
+                nombreMenor = nombre;
+                alturaMenor = altura;
+            } else if (edadMenor > edad) {
+                edadMenor = edad;
+                nombreMenor = nombre;
+                alturaMenor = altura;
             }
             if (sexo == 'F') {
                 cantF++;
@@ -47,9 +46,8 @@ public class act2_1 {
                 alturaMasc += altura;
             }
 
-            System.out.println("desea ingresar datos de otro participante? s para si n para no");
-            cent = sc.next().charAt(0);
-            sc.nextLine();
+            System.out.print("desea ingresar datos de otro participante? s para si n para no");
+            cent = caracter();
         } while (cent == 's');
         System.out.println("\tel promedio de altura de las mujeres es de " +
 
@@ -59,15 +57,28 @@ public class act2_1 {
                 + "\n\tla persona mas joven se llama " + nombreMenor + " tiene " + edadMenor + " años y mide "
                 + alturaMenor + "cm.");
     }
+
     public static int entero(){
         Scanner sc = new Scanner(System.in);
         System.out.println();
         return(sc.nextInt());
     }
+    public static String cadena() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println();
+        return (sc.nextLine());
+    }
+    public static char caracter() {
+        Scanner sc = new Scanner(System.in);
+        System.out.println();
+        return (sc.next().charAt(0));
+    }
+
     public static float promed(float a, int b) {
-        if(b==0){
+        if (b == 0) {
             return 0;
-        }else{
-        return a / b;}
+        } else {
+            return a / b;
+        }
     }
 }
