@@ -13,7 +13,6 @@ para continuar con la carga el programa debe preguntar si sedea continuar o no. 
 
 public class act2_1 {
     public static void main(String[] ar) {
-        Scanner sc = new Scanner(System.in);
         char sexo, cent;
         int altura, alturaMenor=0, edad, edadMenor = 0, cantTotal = 0, cantF = 0, cantM = 0;
         float alturaFem = 0, promedioEdad = 0, alturaMasc = 0;
@@ -60,7 +59,11 @@ public class act2_1 {
                 + "\n\tla persona mas joven se llama " + nombreMenor + " tiene " + edadMenor + " años y mide "
                 + alturaMenor + "cm.");
     }
-
+    public static int entero(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println();
+        return(sc.nextInt());
+    }
     public static float promed(float a, int b) {
         if(b==0){
             return 0;

@@ -9,20 +9,31 @@ Utilice el ciclo más apropiado. */
 
 public class act1_1 {
     public static void main(String[] ar) {
-        Scanner sc = new Scanner(System.in);
         int num, cant=0;
         float promedio=0;
         for (int i = 0; i < 10; i++) {
             do {
-                System.out.println("ingrese un entero positivo: ");
-                num = sc.nextInt();
-            } while (num <= 0);
-            if (num%5==0 && num<25){
+                num=ingresarEntero();
+            } while (mayorQueCero(num));
+            if (comprobacion(num)){
                 System.out.println("correcto");
                 cant++;
                 promedio+=num;
             }
         }
         System.out.println("La cantidad de enteros que cumplen la condicion es de: "+cant+"\nSu promedio es de: "+promedio/cant);
+    }
+    public static int ingresarEntero() {
+        Scanner sc = new Scanner(System.in);
+        System.out.print("Ingresa un número entero: ");
+        return sc.nextInt();
+    }
+    public static Boolean mayorQueCero(int a){
+        if (a>0) {return false;}
+        else return true;
+    }
+    public static Boolean comprobacion(int a){
+        if (a%5==0 && a<25) {return true;}
+        else return false;
     }
 }
