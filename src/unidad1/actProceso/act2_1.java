@@ -38,10 +38,10 @@ public class act2_1 {
                 nombreMenor = nombre;
                 alturaMenor = altura;
             }
-            if (sexo == 'F') {
+            if (sexo == 'F'||sexo=='f') {
                 cantF++;
                 alturaFem += altura;
-            } else if (sexo == 'M') {
+            } else if (sexo == 'M'||sexo =='m') {
                 cantM++;
                 alturaMasc += altura;
             }
@@ -49,9 +49,8 @@ public class act2_1 {
             System.out.print("desea ingresar datos de otro participante? s para si n para no");
             cent = caracter();
         } while (cent == 's');
-        System.out.println("\tel promedio de altura de las mujeres es de " +
-
-                promed(alturaFem, cantF)
+        System.out.println(
+                "\tel promedio de altura de las mujeres es de " +promed(alturaFem, cantF)
                 + "\n\tel promedio de altura de los varones es de " + promed(alturaMasc, cantM)
                 + "\n\tel promedio de edad de los participantes es de " + promed(promedioEdad, cantTotal)
                 + "\n\tla persona mas joven se llama " + nombreMenor + " tiene " + edadMenor + " años y mide "
@@ -61,7 +60,7 @@ public class act2_1 {
     public static int entero(){
         Scanner sc = new Scanner(System.in);
         System.out.println();
-        return(sc.nextInt());
+        return(Integer.parseInt(sc.nextLine()));
     }
     public static String cadena() {
         Scanner sc = new Scanner(System.in);
@@ -75,10 +74,12 @@ public class act2_1 {
     }
 
     public static float promed(float a, int b) {
+        float c=0;
         if (b == 0) {
             return 0;
         } else {
-            return a / b;
+            c=a / b;
+            return c;
         }
     }
 }
