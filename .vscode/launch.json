@@ -6,6 +6,28 @@
     "configurations": [
         {
             "type": "java",
+            "name": "act3_1",
+            "request": "launch",
+            "mainClass": "unidad1.actProceso.actividad3.act3_1",
+            "projectName": "practicas_a80184b6"
+        },
+        {
+            "type": "java",
+            "name": "act1_1",
+            "request": "launch",
+            "mainClass": "unidad1.actProceso.actividad1.act1_1",
+            "projectName": "practicas_a80184b6",
+            "console": "externalTerminal"
+        },
+        {
+            "type": "java",
+            "name": "act3_3",
+            "request": "launch",
+            "mainClass": "unidad1.actProceso.actividad3.act3_3",
+            "projectName": "practicas_a80184b6"
+        },
+        {
+            "type": "java",
             "name": "Current File",
             "request": "launch",
             "mainClass": "${file}"
