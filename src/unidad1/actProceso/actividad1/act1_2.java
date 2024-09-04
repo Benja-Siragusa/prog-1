@@ -1,4 +1,4 @@
-package unidad1.actProceso;
+package unidad1.actProceso.actividad1;
 import java.util.Scanner;
 
 /*El factorial de un número entero se denota de la siguiente manera "n!" y su resultado es n!=n*(n-1)*(n-2)*1. 

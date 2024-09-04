@@ -1,4 +1,4 @@
-package unidad1.actProceso;
+package unidad1.actProceso.actividad1;
 
 import java.util.Scanner;
 
