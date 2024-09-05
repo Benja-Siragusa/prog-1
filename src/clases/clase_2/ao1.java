@@ -1,4 +1,4 @@
-package clase_2;
+package clases.clase_2;
 
 import java.io.IOException;
 import java.util.Scanner;
