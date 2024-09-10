@@ -18,7 +18,7 @@ public class actEvs1 {
 
     public static void main(String[] args) throws IOException, InterruptedException {
         int option = -1, opcionT = -1;
-        double lado1, lado2, lado;
+        double lado1, lado2,lado3, lado;
         Scanner sc = new Scanner(System.in);
         do {
             try {
@@ -64,19 +64,38 @@ public class actEvs1 {
                             break;
                         case 2:
                             System.out.println("Isósceles");
-                            System.out.print("Ingrese el lado  Igual del triangulo: ");
+                            System.out.print("Ingrese el lado Igual del triangulo: ");
                             lado1 = Double.parseDouble(sc.nextLine());
                             System.out.print("Ingrese el lado desigual del triangulo: ");
                             lado2 = Double.parseDouble(sc.nextLine());
+                            if (comprobaion(lado1, lado1, lado2)) {
+                                double perimTria = calcPerimTriIsc(lado1, lado2);
+                                System.out.printf("El perimetro del triangulo es: %.2f%n", perimTria);
+                                System.out.printf("La superficie del triangulo es: %.2f%n",
+                                        calcAreaTriangulos(lado1, lado1, lado2, perimTria));
+                                break;
+                            } else {
+                                System.out.println("el triangulo es imposible de realizar");
+                                break;
+                            }
 
-                            double perimTria = calcPerimTriIsc(lado1, lado2);
-                            System.out.printf("El perimetro del triangulo es: %.2f%n", perimTria);
-                            System.out.printf("La superficie del triangulo es: %.2f%n",
-                                    calcAreaTriangulos(lado1, lado1, lado2, perimTria));
-                            break;
                         case 3:
                             System.out.println("Escaleno");
-                            break;
+                            System.out.print("Ingrese el lado 1 del triangulo: ");
+                            lado1 = Double.parseDouble(sc.nextLine());
+                            System.out.print("Ingrese el lado 2 del triangulo: ");
+                            lado2 = Double.parseDouble(sc.nextLine());
+                            System.out.print("Ingrese el lado 3 del triangulo: ");
+                            lado3 = Double.parseDouble(sc.nextLine());
+                            if (comprobaion(lado1, lado2, lado3)) {
+                                double perimTria = calcPerimTriEsc(lado1, lado2, lado3);
+                                System.out.printf("El perimetro del triangulo es: %.2f%n", perimTria);
+                                System.out.printf("La superficie del triangulo es: %.2f%n",
+                                        calcAreaTriangulos(lado1, lado2, lado3, perimTria));
+                                break;
+                            } else {
+                                System.out.println("el triangulo es imposible de realizar");
+                                break;}
 
                         default:
                             System.out.println("Error de selección");
@@ -153,15 +172,6 @@ public class actEvs1 {
         System.out.printf("Superficie del círculo: %.2f%n", superficie);
     }
 
-    public static double ingreseLado(Scanner sc) {
-        System.err.println("Ingrese lado del triangulo");
-        return Double.parseDouble(sc.nextLine());
-    }
-
-    public static void calcularTriangulo() {
-
-    }
-
     /*----------------------------------------- */
     /* Calcula Perim Rectangulo */
     /*----------------------------------------- */
@@ -199,6 +209,13 @@ public class actEvs1 {
     }
 
     /*----------------------------------------- */
+    /* Calcula Perimetro Triangulo Isc */
+    /*----------------------------------------- */
+    public static Double calcPerimTriEsc(double lado1, double lado2, double lado3) {
+        return lado1 + lado2 + lado3;
+    }
+
+    /*----------------------------------------- */
     /* Calcula Area Triangulos */
     /*----------------------------------------- */
     public static Double calcAreaTriangulos(double lado1, double lado2, double lado3, double perim) {
@@ -206,4 +223,13 @@ public class actEvs1 {
         return Math.sqrt(s * (s - lado1) * (s - lado2) * (s - lado3));
     }
 
+    /*----------------------------------------- */
+    /* Comprobando que el triangulo sea posible */
+    /*----------------------------------------- */
+    public static boolean comprobaion(double a, double b, double c) {
+        if (a + b > c & a + c > b & b + c > a)
+            return true;
+        else
+            return false;
+    }
 }
