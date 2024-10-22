@@ -1,6 +1,5 @@
 package unidad1.actIntegradora;
 
-
 /*Una empresa gastronómica proporciona un bono mensual a sus trabajadores, el cual puede ser por su antigüedad 
 (multiplicada por 500) o bien por el monto de su sueldo (el que sea mayor), de la siguiente forma:
     Cuando la antigüedad es mayor a 2 años, pero menor a 5, se otorga 20 % de su sueldo; cuando es de 5 años 
@@ -24,11 +23,10 @@ public class actInt1 {
 
                 antiguedad = Double.parseDouble(JOptionPane.showInputDialog(null, "Ingrese antigüedad :", "ANTIGUEDAD",
                         JOptionPane.INFORMATION_MESSAGE));
-
                 if (sueldo < 0 || antiguedad < 0) {
                     JOptionPane.showMessageDialog(
                             null,
-                            "Error in el ingreso de datos. Vuelva a ingresarlo.",
+                            "Error en el ingreso de datos. Vuelva a ingresarlo.",
                             "Error de entrada",
                             JOptionPane.ERROR_MESSAGE);
                 }
@@ -39,13 +37,13 @@ public class actInt1 {
                         "ERROR",
                         JOptionPane.ERROR_MESSAGE);
             }
-            if (bonoAntig(sueldo, antiguedad) > bonoSueldo(sueldo))
-                bonoMayor = bonoAntig(sueldo, antiguedad);
-            else
-                bonoMayor = bonoSueldo(sueldo);
+            if ((antiguedad*500) >sueldo){
+                bonoMayor = bonoAntig(antiguedad,sueldo);}
+            else{
+                bonoMayor = bonoSueldo(sueldo);}
             JOptionPane.showMessageDialog(null, "El bono por sueldo es de: " + bonoSueldo(sueldo) + "$\n"
-                    + "El bono por antigüedad es de: " + bonoAntig(sueldo, antiguedad) + "$\n"
-                    + "a usted le corresponde el bono mayor, que es de: " + bonoMayor + "$\n"
+                    + "El bono por antigüedad es de: " + bonoAntig( antiguedad,sueldo) + "$\n"
+                    + "a usted le corresponde el bono en base al sueldo mayor (antiguedad*500 o sueldo), que es de: " + bonoMayor + "$\n"
                     + "Su sueldo con el bono seria de: " + (bonoMayor + sueldo) + "$");
 
             respuesta = JOptionPane.showConfirmDialog(null, "quiere repetir la consulta?",
@@ -65,17 +63,13 @@ public class actInt1 {
         return 0.0;
     }
 
-    private static Double bonoAntig(Double sueldo, Double antiguedad) {
-
-        Double totalAntiguedad = antiguedad * 500;
-        double max = Math.max(sueldo, totalAntiguedad);
+    private static Double bonoAntig( Double antiguedad,double sueldo) {
 
         if (antiguedad > 2 && antiguedad <= 5) {
-            return max * .20;
+            return sueldo * 0.2;
         } else if (antiguedad > 5) {
-            return max * .30;
+            return sueldo * 0.3;
         }
         return 0.0;
     }
-
 }

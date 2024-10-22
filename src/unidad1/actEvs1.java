@@ -1,7 +1,6 @@
 package unidad1;
 
-import java.io.IOException;
-import java.util.Scanner;
+import javax.swing.JOptionPane;
 
 public class actEvs1 {
     /*
@@ -16,183 +15,149 @@ public class actEvs1 {
      * double, según corresponda al llamado del método.
      */
 
-    public static void main(String[] args) throws IOException, InterruptedException {
-        int option = -1, opcionT = -1;
-        double lado1, lado2,lado3, lado;
-        Scanner sc = new Scanner(System.in);
+    public static void main(String[] args) {
+        int opcion = 0;
         do {
             try {
-                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor(); /*  */
-                System.out.println("╔═════════════════════════╗"); /* 201 ╔ 205 ═ 200 ╚ 187╗ 186 ║ 188 ╝ */
-                System.out.println("║   Seleccione la opcion  ║");
-                System.out.println("╚═════════════════════════╝");
-                System.out.println("\t1.circulo");
-                System.out.println("\t2.triangulo");
-                System.out.println("\t3.rectangulo");
-                System.out.println("\t4.cuadrado");
-                System.out.println("\t5.heptagono");
-                System.out.println("\t6.octogono");
-                System.out.println("\t0.salir");
-
-                option = Integer.parseInt(sc.nextLine());
+                opcion = menu();
+                seleccion(opcion);
             } catch (Exception e) {
-                System.out.println("Error de Ingreso de datos");
+                JOptionPane.showMessageDialog(null, "error en el ingreso de datos", "ERROR",
+                        JOptionPane.ERROR_MESSAGE);
             }
-            switch (option) {
-                case 1:
-                    System.out.println("Seleccionado Circulo");
+        } while (opcion != 6);
+    }
 
-                    calcularCirculo(sc);
-                    break;
+    public static int menu() {
+        Object[] opcion = { "circulo", "triangulo", "rectangulo", "cuadrado", "heptagono", "octogono", "salir" };
+        int seleccion = JOptionPane.showOptionDialog(null,
+                "\t╔═════════════════════════╗\n\t║        Seleccione la opcion        ║\n\t╚═════════════════════════╝", "MENU",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcion, opcion[0]);
+        return seleccion;
+    }
 
-                case 2:
-                    System.out.println("Seleccionado Triangulo");
-                    System.out.println("╔═════════════════════════╗"); /* 201 ╔ 205 ═ 200 ╚ 187╗ 186 ║ 188 ╝ */
-                    System.out.println("║   Seleccione triángulo  ║");
-                    System.out.println("╚═════════════════════════╝");
-                    System.out.println("\t1.equilátero");
-                    System.out.println("\t2.isósceles");
-                    System.out.println("\t3.escaleno");
-                    opcionT = Integer.parseInt(sc.nextLine());
-                    switch (opcionT) {
-                        case 1:
-                            System.out.println("Equilatero");
-                            System.out.println("Ingrese el lado del triangulo: ");
-                            lado1 = Double.parseDouble(sc.nextLine());
-                            System.out.printf("El perimetro del triangulo es: %.2f%n", calcPerimPolReg(lado1, 3));
-                            System.out.printf("La superficie del triangulo es: %.2f%n", calcAreaPolReg(lado1, 3));
-                            break;
-                        case 2:
-                            System.out.println("Isósceles");
-                            System.out.print("Ingrese el lado Igual del triangulo: ");
-                            lado1 = Double.parseDouble(sc.nextLine());
-                            System.out.print("Ingrese el lado desigual del triangulo: ");
-                            lado2 = Double.parseDouble(sc.nextLine());
-                            if (comprobaion(lado1, lado1, lado2)) {
-                                double perimTria = calcPerimTriIsc(lado1, lado2);
-                                System.out.printf("El perimetro del triangulo es: %.2f%n", perimTria);
-                                System.out.printf("La superficie del triangulo es: %.2f%n",
-                                        calcAreaTriangulos(lado1, lado1, lado2, perimTria));
-                                break;
-                            } else {
-                                System.out.println("el triangulo es imposible de realizar");
-                                break;
-                            }
-
-                        case 3:
-                            System.out.println("Escaleno");
-                            System.out.print("Ingrese el lado 1 del triangulo: ");
-                            lado1 = Double.parseDouble(sc.nextLine());
-                            System.out.print("Ingrese el lado 2 del triangulo: ");
-                            lado2 = Double.parseDouble(sc.nextLine());
-                            System.out.print("Ingrese el lado 3 del triangulo: ");
-                            lado3 = Double.parseDouble(sc.nextLine());
-                            if (comprobaion(lado1, lado2, lado3)) {
-                                double perimTria = calcPerimTriEsc(lado1, lado2, lado3);
-                                System.out.printf("El perimetro del triangulo es: %.2f%n", perimTria);
-                                System.out.printf("La superficie del triangulo es: %.2f%n",
-                                        calcAreaTriangulos(lado1, lado2, lado3, perimTria));
-                                break;
-                            } else {
-                                System.out.println("el triangulo es imposible de realizar");
-                                break;}
-
-                        default:
-                            System.out.println("Error de selección");
-                            break;
-                    }
-                    break;
-
-                case 3:
-                    System.out.println("Seleccionado Rectángulo");
-                    System.out.println("Ingrese lado 1: ");
-                    lado1 = Double.parseDouble(sc.nextLine());
-                    System.out.println("Ingrese lado 2: ");
-                    lado2 = Double.parseDouble(sc.nextLine());
-                    System.out.printf("El perímetro del rectángulo es: %.2f%n", calcularPerimetro(lado1, lado2));
-                    System.out.printf("La superficie del rectángulo es: %.2f%n", calcularSuperficie(lado1, lado2));
-                    break;
-
-                case 4:
-                    System.out.println("Seleccionado Cuadrado");
-                    System.out.print("Ingrese el lado del Cuadrado: ");
-                    lado = Double.parseDouble(sc.nextLine());
-                    System.out.printf("El perímetro del Cuadrado de lado: %.2f es: %.2f%n", lado,
-                            calcPerimPolReg(lado, 4));
-                    System.out.printf("La superficie del cuadrado es: %.2f%n", calcAreaPolReg(lado, 4));
-                    break;
-
-                case 5:
-                    System.out.println("Seleccionado Heptágono");
-                    System.out.print("Ingrese el lado del Heptágono: ");
-                    lado = Double.parseDouble(sc.nextLine());
-                    System.out.printf("El perímetro del Heptágono de lado: %.2f es: %.2f%n", lado,
-                            calcPerimPolReg(lado, 7));
-                    System.out.printf("La superficie del Heptágono es: %.2f%n", calcAreaPolReg(lado, 7));
-                    break;
-
-                case 6:
-                    System.out.println("Seleccionado Octógono");
-                    System.out.print("Ingrese el lado del Octógono: ");
-                    lado = Double.parseDouble(sc.nextLine());
-                    System.out.printf("El perímetro del Octógono de lado: %.2f es: %.2f%n", lado,
-                            calcPerimPolReg(lado, 8));
-                    System.out.printf("La superficie del Octógono es: %.2f%n", calcAreaPolReg(lado, 8));
-                    break;
-
-                case 0:
-                    System.out.println("Hasta luego");
-                    break;
-
-                default:
-                    System.out.println("Ingrese una opción válida.");
-                    break;
-            }
-            if (option != 0) {
-                System.out.print("\nPresione una tecla para continuar...");
-                sc.nextLine();
-            }
-
-        } while (option != 0);
-
-        sc.close();
+    public static void seleccion(int a) {
+        switch (a) {
+            case 0:
+                calcularCirculo();
+                break;
+            case 1:
+                menuTriangulo();
+                break;
+            case 2:
+                calcularRectangulo();
+                break;
+            case 3:
+                calcularFiguras(4);
+                break;
+            case 4:
+                calcularFiguras(7);
+                break;
+            case 5:
+                calcularFiguras(8);
+                break;
+            default:
+                JOptionPane.showMessageDialog(null, "Hasta luego!", "OPCION SALIR", JOptionPane.INFORMATION_MESSAGE);
+                break;
+        }
     }
 
     /*----------------------------------------- */
     /* Calcula Perim Area Círculo */
     /*----------------------------------------- */
-    public static void calcularCirculo(Scanner ext) {
-        System.out.print("Ingrese el radio del círculo: ");
+    public static void calcularCirculo() {
 
-        double radio = Double.parseDouble(ext.nextLine());
+        double radio = Double.parseDouble(JOptionPane.showInputDialog(null, "ingrese el radio del circulo",
+                "OPCION CIRCULO", JOptionPane.INFORMATION_MESSAGE));
         double perimetro = 2 * Math.PI * radio;
         double superficie = Math.PI * Math.pow(radio, 2);
+        JOptionPane.showMessageDialog(null, "Perimetro del circulo: " + perimetro + "\nArea del circulo: " + superficie,
+                "RESULTADO", JOptionPane.INFORMATION_MESSAGE);
+    }
 
-        System.out.printf("Perímetro del círculo: %.2f%n ", perimetro);
-        System.out.printf("Superficie del círculo: %.2f%n", superficie);
+    public static void menuTriangulo() {
+        Object[] opcion = { "equilátero", "isóseles", "escaleno", };
+        int seleccion = JOptionPane.showOptionDialog(null,
+                "\t╔═════════════════════════╗\n\t║   Seleccione triángulo  ║\n\t╚═════════════════════════╝",
+                "MENU TRIANGULO",
+                JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE, null, opcion, opcion[0]);
+        switch (seleccion) {
+            case 0:
+                int lado = Integer.parseInt(JOptionPane.showInputDialog(null, "ingrese la medida de los lado",
+                        "PEDIR LADO", JOptionPane.INFORMATION_MESSAGE));
+                JOptionPane.showMessageDialog(null,
+                        "Perimetro del triangulo: " + (lado*3) + "\nArea del triangulo: "
+                                + calcAreaPolReg(lado, 3),
+                        "INFORMACION TRIANGULO EQU", JOptionPane.INFORMATION_MESSAGE);
+                break;
+            case 1:
+                int lado1 = Integer
+                        .parseInt(JOptionPane.showInputDialog(null, "ingrese la medida del lado igual del triangulo",
+                                "PEDIR LADO IGUAL", JOptionPane.INFORMATION_MESSAGE));
+                int lado2 = Integer
+                        .parseInt(JOptionPane.showInputDialog(null, "ingrese la medida del lado desigual del triangulo",
+                                "PEDIR LADO DESIGUAL", JOptionPane.INFORMATION_MESSAGE));
+                if (comprobaion(lado1, lado1, lado2)) {
+                    double perimTria = calcPerimTriIsc(lado1, lado2);
+                    JOptionPane.showMessageDialog(null,
+                            "Perimetro del triangulo: " + perimTria + "\nArea del triangulo: "
+                                    + calcAreaTriangulos(lado1, lado1, lado2, perimTria),
+                            "INFORMACION TRIANGULO ISC", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Triangulo imposible de realizar", "INFORMACION TRIANGULO ISC",
+                            JOptionPane.ERROR_MESSAGE);
+
+                }
+                break;
+            case 2:
+                int lado1e = Integer.parseInt(JOptionPane.showInputDialog(null,
+                        "ingrese la medida del lado 1 del triangulo", "PEDIR LADO 1", JOptionPane.INFORMATION_MESSAGE));
+                int lado2e = Integer.parseInt(JOptionPane.showInputDialog(null,
+                        "ingrese la medida del lado 2 del triangulo", "PEDIR LADO 2", JOptionPane.INFORMATION_MESSAGE));
+                int lado3e = Integer.parseInt(JOptionPane.showInputDialog(null,
+                        "ingrese la medida del lado 3 del triangulo", "PEDIR LADO 3", JOptionPane.INFORMATION_MESSAGE));
+
+                if (comprobaion(lado1e, lado2e, lado3e)) {
+                    double perimTria = calcPerimTriEsc(lado1e, lado2e, lado3e);
+                    JOptionPane.showMessageDialog(null,
+                            "Perimetro del triangulo: " + perimTria + "\nArea del triangulo: "
+                                    + calcAreaTriangulos(lado1e, lado2e, lado3e, perimTria),
+                            "INFORMACION TRIANGULO ESC", JOptionPane.INFORMATION_MESSAGE);
+                } else {
+                    JOptionPane.showMessageDialog(null, "Triangulo imposible de realizar", "INFORMACION TRIANGULO ISC",
+                            JOptionPane.ERROR_MESSAGE);
+
+                }
+                break;
+        }
     }
 
     /*----------------------------------------- */
-    /* Calcula Perim Rectangulo */
+    /* Calcula Perim y Area Rectangulo */
     /*----------------------------------------- */
-    public static Double calcularPerimetro(double L1, double L2) {
-        return (double) 2 * (L1 + L2);
+    public static void calcularRectangulo() {
+        int l2 = Integer.parseInt(JOptionPane.showInputDialog(null,
+                "ingrese la medida del lado 1 del rectangulo", "PEDIR LADO 1", JOptionPane.INFORMATION_MESSAGE));
+        int l1 = Integer.parseInt(JOptionPane.showInputDialog(null,
+                "ingrese la medida del lado 2 del rectangulo", "PEDIR LADO 2", JOptionPane.INFORMATION_MESSAGE));
+        JOptionPane.showMessageDialog(null,
+                "Perimetro del rectangulo: " + (2 * (l1 + l2)) + "\nArea del rectangulo: "
+                        + (l1 * l2),
+                "INFORMACION TRIANGULO ESC", JOptionPane.INFORMATION_MESSAGE);
     }
 
     /*----------------------------------------- */
-    /* Calcula Area Rectangulo */
+    /* Calcula Perim y Area Poligonos */
     /*----------------------------------------- */
-    public static Double calcularSuperficie(double L1, double L2) {
-        return (double) L1 * L2;
+    public static void calcularFiguras(int a) {
+        int lado = Integer.parseInt(JOptionPane.showInputDialog(null,
+                "ingrese la medida del lado", "PEDIR LADO", JOptionPane.INFORMATION_MESSAGE));
+        JOptionPane.showMessageDialog(null,
+                "Perimetro de la figura: " + (lado * a) + "\nArea dela figura: "
+                        + calcAreaPolReg(lado, a),
+                "INFORMACION TRIANGULO ESC", JOptionPane.INFORMATION_MESSAGE);
     }
 
-    /*----------------------------------------- */
-    /* Calcula Perimetro Poligono Regular */
-    /*----------------------------------------- */
-    public static double calcPerimPolReg(double lado, int nlados) { /* */
-        double perimetro = nlados * lado;
-        return perimetro;
-    }
 
     /*----------------------------------------- */
     /* Calcula Area Poligono Regular */
